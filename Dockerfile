@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM adoptopenjdk/openjdk8:alpine
 MAINTAINER Atlassian Bitbucket Server Team
 
 ENV RUN_USER            daemon
@@ -19,7 +19,7 @@ WORKDIR $BITBUCKET_HOME
 CMD ["/entrypoint.sh", "-fg"]
 ENTRYPOINT ["/sbin/tini", "--"]
 
-RUN apk add --no-cache wget curl git git-daemon openssh bash procps openssl perl ttf-dejavu tini
+RUN apk add --no-cache wget git git-daemon openssh bash procps perl ttf-dejavu tini
 
 COPY entrypoint.sh              /entrypoint.sh
 
