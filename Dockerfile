@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM adoptopenjdk/openjdk8:alpine
 MAINTAINER Atlassian Bitbucket Server Team
 
 ENV RUN_USER            daemon
@@ -30,3 +30,7 @@ COPY . /tmp
 RUN mkdir -p                             ${BITBUCKET_INSTALL_DIR} \
     && curl -L --silent                  ${DOWNLOAD_URL} | tar -xz --strip-components=1 -C "$BITBUCKET_INSTALL_DIR" \
     && chown -R ${RUN_USER}:${RUN_GROUP} ${BITBUCKET_INSTALL_DIR}/
+
+# Workaround for AdoptOpenJDK fontconfig bug
+RUN ln -s /lib/libc.musl-x86_64.so.1 /usr/lib/libc.musl-x86_64.so.1
+ENV LD_LIBRARY_PATH /usr/lib
