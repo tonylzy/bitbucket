@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8:slim
+FROM adoptopenjdk/openjdk11:jdk-11.0.1.13-slim
 
 ENV RUN_USER            					daemon
 ENV RUN_GROUP           					daemon

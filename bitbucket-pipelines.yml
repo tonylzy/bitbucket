@@ -26,6 +26,17 @@ pipelines:
             - export DEFAULT_RELEASE='true'
             - export ADDITIONAL_TAG_SUFFIXES='jdk8,ubuntu'
             - python /usr/src/app/run.py --create
+    create-release-base-6-jdk11:
+      - step:
+          script:
+            - git remote set-url origin ${BITBUCKET_GIT_HTTP_ORIGIN}
+            - git fetch --all
+            - export BASE_BRANCH='base-6-jdk11'
+            - export MAC_PRODUCT_KEY='bitbucket'
+            - export DOCKERFILE_VERSION_STRING='BITBUCKET_VERSION'
+            - export DEFAULT_RELEASE='false'
+            - export ADDITIONAL_TAG_SUFFIXES='ubuntu-jdk11'
+            - python /usr/src/app/run.py --create
     test:
       - step:
           image: docker:stable-git
@@ -63,4 +74,15 @@ pipelines:
             - export DOCKERFILE_VERSION_STRING='BITBUCKET_VERSION'
             - export DEFAULT_RELEASE='true'
             - export ADDITIONAL_TAG_SUFFIXES='jdk8,ubuntu'
+            - python /usr/src/app/run.py --update
+    base-6-jdk11:
+      - step:
+          script:
+            - git remote set-url origin ${BITBUCKET_GIT_HTTP_ORIGIN}
+            - git fetch --all
+            - export BASE_BRANCH='base-6-jdk11'
+            - export MAC_PRODUCT_KEY='bitbucket'
+            - export DOCKERFILE_VERSION_STRING='BITBUCKET_VERSION'
+            - export DEFAULT_RELEASE='false'
+            - export ADDITIONAL_TAG_SUFFIXES='ubuntu-jdk11'
             - python /usr/src/app/run.py --update
