@@ -23,7 +23,7 @@ RUN apk add --no-cache wget curl git git-daemon openssh bash procps openssl perl
 
 COPY entrypoint.sh              /entrypoint.sh
 
-ARG BITBUCKET_VERSION=5.0.6
+ARG BITBUCKET_VERSION=5.12.4
 ARG DOWNLOAD_URL=https://product-downloads.atlassian.com/software/stash/downloads/atlassian-bitbucket-${BITBUCKET_VERSION}.tar.gz
 COPY . /tmp
 
