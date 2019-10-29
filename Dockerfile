@@ -22,8 +22,14 @@ CMD ["/entrypoint.py", "-fg"]
 ENTRYPOINT ["/sbin/tini", "--"]
 
 RUN apt-get update \
-	&& apt-get install -y --no-install-recommends fontconfig git openssh-client perl python3 python3-jinja2 \
+	&& apt-get install -y --no-install-recommends fontconfig git openssh-client perl python3 python3-jinja2 nfs-common rpcbind inetutils-ping \
 	&& apt-get clean autoclean && apt-get autoremove -y && rm -rf /var/lib/apt/lists/*
+
+# Create the directory where rpcbind wants to create its symbolic link
+RUN mkdir -p /run/sendsigs.omit.d/
+
+# Create placeholder for shared home
+RUN mkdir -p ${BITBUCKET_HOME}/shared
 
 ARG TINI_VERSION=v0.18.0
 ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /sbin/tini

@@ -33,7 +33,15 @@ env = {k.lower(): v
 
 
 ######################################################################
-# Start as the correct user
+# Startup rpcbind service 
+cmd = "/etc/init.d/rpcbind start"
+output = os.system(cmd)
+
+# Mount NFS shares
+cmd = "/bin/mount -a -v -n"
+output = os.system(cmd)
+
+# Start Bitbucket as the correct user
 
 start_cmd = f"{env['bitbucket_install_dir']}/bin/start-bitbucket.sh"
 if env['elasticsearch_enabled'] == 'false' or env['application_mode'] == 'mirror':
