@@ -34,6 +34,7 @@ env = {k.lower(): v
 
 ######################################################################
 # Startup rpcbind service 
+<<<<<<< HEAD
 cmd = "/etc/init.d/rpcbind start"
 output = os.system(cmd)
 
