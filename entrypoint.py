@@ -34,12 +34,27 @@ env = {k.lower(): v
 
 ######################################################################
 # Startup rpcbind service 
-<<<<<<< HEAD
 cmd = "/etc/init.d/rpcbind start"
 output = os.system(cmd)
 
+# Fetch shared home location and create if not existing
+if env['bitbucket_shared_home']:
+  shome = env['bitbucket_shared_home']
+else:
+  shome = env['bitbucket_home'] + "/shared"
+
+found_mount_in_fstab = False
+with open('/etc/fstab') as f:
+  if shome in f.read():
+    found_mount_in_fstab = True
+if not found_mount_in_fstab:
+  logging.warn(f"{env['bitbucket_shared_home']} not found in /etc/fstab. Remote filesystem may not have been mounted under {env['bitbucket_home']}/shared")
+
+cmd = "mkdir -p " + shome
+output = os.system(cmd)
+
 # Mount NFS shares
-cmd = "/bin/mount -a -v -n"
+cmd = "/bin/mount -a -n"
 output = os.system(cmd)
 
 # Start Bitbucket as the correct user
