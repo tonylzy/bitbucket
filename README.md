@@ -127,7 +127,7 @@ Oracle JDBC drivers. To use these databases you will need to copy a suitable
 driver into the container and restart it. For example, to copy the MySQL driver
 into a container named "bitbucket", you would do the following:
 
-    docker cp mysql-connector-java.x.y.z.jar bitbucket:/opt/atlassian/bitbucket/lib
+    docker cp mysql-connector-java.x.y.z.jar bitbucket:/var/atlassian/application-data/bitbucket/lib
     docker restart bitbucket
 
 For more information see [Connecting Bitbucket Server to an external database](https://confluence.atlassian.com/bitbucketserver/connecting-bitbucket-server-to-an-external-database-776640378.html).
