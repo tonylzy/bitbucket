@@ -1,7 +1,7 @@
 ARG BASE_IMAGE=adoptopenjdk:8-hotspot
 FROM $BASE_IMAGE
 
-ARG BITBUCKET_VERSION
+ARG BITBUCKET_VERSION=7.2.2
 
 
 ENV RUN_USER                                        bitbucket
